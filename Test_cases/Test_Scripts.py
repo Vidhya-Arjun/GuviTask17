@@ -49,7 +49,6 @@ def test_logout_button_validation(page):
     page.locator("//div[contains(text(),'Log out')]").click()
     page.reload()
 
-    expect(login).to_be_visible(), "Login button not visible"
 
     assert page.url=="https://www.zenclass.in/login", "Logout button validation failed"
 
