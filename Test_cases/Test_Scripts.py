@@ -1,12 +1,10 @@
-import time
-
-from playwright.sync_api import expect
-
+import pytest
+from playwright.sync_api import sync_playwright,expect
 
 def test_validate_login(page):
     page.goto("https://www.zenclass.in/login")
     page.locator("//input[@placeholder='Enter your mail']").fill("vidhyasarjun@gmail.com")
-    page.locator("//input[@type='password']").fill("Guvi!2Plat")
+    page.locator("//input[@type='password']").fill("Gu")
     page.locator("//button[@type='submit']").click()
     page.locator("//button[@aria-label='Close popup']").click()
     url = page.url
@@ -44,12 +42,12 @@ def test_logout_button_validation(page):
     page.goto("https://www.zenclass.in/login")
     page.locator("//input[@placeholder='Enter your mail']").fill("vidhyasarjun@gmail.com")
     page.locator("//input[@type='password']").fill("Guvi!2Plat")
-    login = page.locator("//button[@type='submit']").click()
+    login = page.locator("//button[@type='submit']")
+    login.click()
     page.locator("//button[@aria-label='Close popup']").click()
     page.locator("//img[@id='profile-click-icon']").click()
     page.locator("//div[contains(text(),'Log out')]").click()
-
-
+    page.reload()
 
     expect(login).to_be_visible(), "Login button not visible"
 
